@@ -470,7 +470,7 @@ function buildProxyGroups({
     const tagGroups = Object.entries(T).map(([tag, nodes]) => ({
         name: tag,
         icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Bot.png`,
-        type: "select",
+        type: "url-test",
         ...regexFilter ? {
             "include-all": !0,
             filter: `\\[Tag:${tag}\\]`
