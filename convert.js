@@ -168,7 +168,15 @@ const NODE_SUFFIX = "节点",
             path: "./ruleset/Crypto.list"
         }
     },
-    baseRules = [`RULE-SET,ADBlock,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,AdditionalFilter,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,SogouInput,${PROXY_GROUPS.SOGOU_INPUT}`, `DOMAIN-SUFFIX,truthsocial.com,${PROXY_GROUPS.TRUTH_SOCIAL}`, `RULE-SET,StaticResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,CDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,AdditionalCDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,Crypto,${PROXY_GROUPS.CRYPTO}`, `RULE-SET,EHentai,${PROXY_GROUPS.EHENTAI}`, `RULE-SET,TikTok,${PROXY_GROUPS.TIKTOK}`, `RULE-SET,SteamFix,${PROXY_GROUPS.DIRECT}`, `RULE-SET,GoogleFCM,${PROXY_GROUPS.DIRECT}`, `GEOSITE,YOUTUBE,${PROXY_GROUPS.YOUTUBE}`, `GEOSITE,TELEGRAM,${PROXY_GROUPS.TELEGRAM}`, `GEOSITE,CATEGORY-AI-!CN,${PROXY_GROUPS.AI_SERVICE}`, `GEOSITE,GOOGLE-PLAY@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,MICROSOFT@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,APPLE,${PROXY_GROUPS.APPLE}`, `GEOSITE,MICROSOFT,${PROXY_GROUPS.MICROSOFT}`, `GEOSITE,GOOGLE,${PROXY_GROUPS.GOOGLE}`, `GEOSITE,NETFLIX,${PROXY_GROUPS.NETFLIX}`, `GEOSITE,SPOTIFY,${PROXY_GROUPS.SPOTIFY}`, `GEOSITE,BAHAMUT,${PROXY_GROUPS.BAHAMUT}`, `GEOSITE,BILIBILI,${PROXY_GROUPS.BILIBILI}`, `GEOSITE,PIKPAK,${PROXY_GROUPS.PIKPAK}`, `GEOSITE,GFW,${PROXY_GROUPS.SELECT}`, `GEOSITE,CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,PRIVATE,${PROXY_GROUPS.DIRECT}`, `GEOIP,NETFLIX,${PROXY_GROUPS.NETFLIX},no-resolve`, `GEOIP,TELEGRAM,${PROXY_GROUPS.TELEGRAM},no-resolve`, `GEOIP,CN,${PROXY_GROUPS.DIRECT}`, `GEOIP,PRIVATE,${PROXY_GROUPS.DIRECT}`, `DST-PORT,22,${PROXY_GROUPS.SSH}`, `MATCH,${PROXY_GROUPS.SELECT}`],
+    whiteListRules = [
+        `DOMAIN-SUFFIX,umeng.com,${PROXY_GROUPS.DIRECT}`,
+        `DOMAIN-SUFFIX,picgo.app,${PROXY_GROUPS.DIRECT}`,
+        `DOMAIN-SUFFIX,zijieapi.com,${PROXY_GROUPS.DIRECT}`,
+        `DOMAIN-SUFFIX,doubao.com,${PROXY_GROUPS.DIRECT}`,
+        `DOMAIN-SUFFIX,datasink.sensorsdata.cn,${PROXY_GROUPS.DIRECT}`,
+        `DOMAIN-SUFFIX,polyfill.io,${PROXY_GROUPS.DIRECT}`
+    ],
+    baseRules = [`RULE-SET,ADBlock,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,AdditionalFilter,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,SogouInput,${PROXY_GROUPS.SOGOU_INPUT}`, `DOMAIN-SUFFIX,truthsocial.com,${PROXY_GROUPS.TRUTH_SOCIAL}`, `RULE-SET,StaticResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,CDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,AdditionalCDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,Crypto,${PROXY_GROUPS.CRYPTO}`, `RULE-SET,EHentai,${PROXY_GROUPS.EHENTAI}`, `RULE-SET,TikTok,${PROXY_GROUPS.TIKTOK}`, `RULE-SET,SteamFix,${PROXY_GROUPS.DIRECT}`, `RULE-SET,GoogleFCM,${PROXY_GROUPS.DIRECT}`, `GEOSITE,YOUTUBE,${PROXY_GROUPS.YOUTUBE}`, `GEOSITE,TELEGRAM,${PROXY_GROUPS.TELEGRAM}`, `GEOSITE,CATEGORY-AI-!CN,${PROXY_GROUPS.AI_SERVICE}`, `GEOSITE,GOOGLE-PLAY@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,MICROSOFT@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,APPLE,${PROXY_GROUPS.APPLE}`, `GEOSITE,MICROSOFT,${PROXY_GROUPS.MICROSOFT}`, `GEOSITE,GOOGLE,${PROXY_GROUPS.GOOGLE}`, `GEOSITE,NETFLIX,${PROXY_GROUPS.NETFLIX}`, `GEOSITE,SPOTIFY,${PROXY_GROUPS.SPOTIFY}`, `GEOSITE,BAHAMUT,${PROXY_GROUPS.BAHAMUT}`, `GEOSITE,BILIBILI,${PROXY_GROUPS.BILIBILI}`, `GEOSITE,PIKPAK,${PROXY_GROUPS.PIKPAK}`, `GEOSITE,GFW,${PROXY_GROUPS.SELECT}`, `DOMAIN-SUFFIX,cn,${PROXY_GROUPS.DIRECT}`, `GEOSITE,CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,PRIVATE,${PROXY_GROUPS.DIRECT}`, `GEOIP,NETFLIX,${PROXY_GROUPS.NETFLIX},no-resolve`, `GEOIP,TELEGRAM,${PROXY_GROUPS.TELEGRAM},no-resolve`, `GEOIP,CN,${PROXY_GROUPS.DIRECT}`, `GEOIP,PRIVATE,${PROXY_GROUPS.DIRECT}`, `DST-PORT,22,${PROXY_GROUPS.SSH}`, `MATCH,${PROXY_GROUPS.SELECT}`],
     snifferConfig = {
         sniff: {
             TLS: {
@@ -191,7 +199,7 @@ const NODE_SUFFIX = "节点",
     }),
     dnsConfigFakeIp = buildDnsConfig({
         mode: "fake-ip",
-        fakeIpFilter: ["geosite:private", "geosite:connectivity-check", "geosite:cn", "Mijia Cloud", "dig.io.mi.com", "localhost.ptlogin2.qq.com", "*.icloud.com", "*.stun.*.*", "*.stun.*.*.*"]
+        fakeIpFilter: ["+.cn", "geosite:private", "geosite:connectivity-check", "geosite:cn", "Mijia Cloud", "dlg.io.mi.com", "dig.io.mi.com", "localhost.ptlogin2.qq.com", "*.icloud.com", "*.stun.*.*", "*.stun.*.*.*"]
     }),
     geoxURL = {
         geoip: `${CDN_URL}/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat`,
@@ -202,74 +210,74 @@ const NODE_SUFFIX = "节点",
     countriesMeta = {
         "香港": {
             weight: 10,
-            pattern: "香港|港|HK|hk|Hong Kong|HongKong|hongkong|🇭🇰",
+            pattern: "(?i)香港|HK|HKG|Hong ?Kong|Hongkong|🇭🇰",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Hong_Kong.png`
         },
         "澳门": {
-            pattern: "澳门|MO|Macau|🇲🇴",
+            pattern: "(?i)澳门|MO|Macau|🇲🇴",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Macao.png`
         },
         "台湾": {
             weight: 20,
-            pattern: "台|新北|彰化|TW|Taiwan|🇹🇼",
+            pattern: "(?i)台湾|台|\\bTW\\b|Taiwan|Taipei|台北|新北|新台|彰化|🇹🇼|(深|沪|呼|京|广|杭)台",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Taiwan.png`
         },
         "新加坡": {
             weight: 30,
-            pattern: "新加坡|坡|狮城|SG|Singapore|🇸🇬",
+            pattern: "(?i)新加坡|坡|狮城|\\bSG\\b|Singapore|🇸🇬|(深|沪|呼|京|广|杭)新",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Singapore.png`
         },
         "日本": {
             weight: 40,
-            pattern: "日本|川日|东京|大阪|泉日|埼玉|沪日|深日|JP|Japan|🇯🇵",
+            pattern: "(?i)日本|\\bJP\\b|Japan|东京|大阪|大坂|埼玉|Tokyo|Osaka|川日|泉日|(深|沪|呼|京|广|杭|中|辽)日|🇯🇵",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Japan.png`
         },
         "韩国": {
-            pattern: "KR|Korea|KOR|首尔|韩|韓|🇰🇷",
+            pattern: "(?i)韩国|KR|\\bKOR\\b|Korea|首尔|春川|韩|韓|🇰🇷",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Korea.png`
         },
         "美国": {
             weight: 50,
-            pattern: "美国|美|US|United States|🇺🇸",
+            pattern: "(?i)美国|美|\\bUS\\b|\\bUSA\\b|United ?States|America|🇺🇸|洛杉矶|圣何塞|圣荷西|硅谷|西雅图|纽约|达拉斯|波特兰|芝加哥|哥伦布|俄勒冈|密歇根|拉斯维加斯|凤凰城|费利蒙|阿什本|Los ?Angeles|San ?Jose|Silicon ?Valley|Seattle|New ?York|Dallas|Portland|Chicago|Columbus|Oregon|Michigan|Ashburn|(深|沪|呼|京|广|杭)美",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/United_States.png`
         },
         "加拿大": {
-            pattern: "加拿大|Canada|CA|🇨🇦",
+            pattern: "(?i)加拿大|Canada|\\bCA\\b|多伦多|温哥华|🇨🇦",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Canada.png`
         },
         "英国": {
             weight: 60,
-            pattern: "英国|United Kingdom|UK|伦敦|London|🇬🇧",
+            pattern: "(?i)英国|\\bUK\\b|United ?Kingdom|Great ?Britain|伦敦|London|(深|沪|呼|京|广|杭)英|🇬🇧",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/United_Kingdom.png`
         },
         "澳大利亚": {
-            pattern: "澳洲|澳大利亚|AU|Australia|🇦🇺",
+            pattern: "(?i)澳洲|澳大利亚|\\bAU\\b|Australia|墨尔本|悉尼|土澳|(深|沪|呼|京|广|杭)澳|🇦🇺",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Australia.png`
         },
         "德国": {
             weight: 70,
-            pattern: "德国|德|DE|Germany|🇩🇪",
+            pattern: "(?i)德国|德|\\bDE\\b|Germany|法兰克福|Frankfurt|(深|沪|呼|京|广|杭)德|🇩🇪",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Germany.png`
         },
         "法国": {
             weight: 80,
-            pattern: "法国|法|FR|France|🇫🇷",
+            pattern: "(?i)法国|法|\\bFR\\b|France|巴黎|Paris|🇫🇷",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/France.png`
         },
         "俄罗斯": {
-            pattern: "俄罗斯|俄|RU|Russia|🇷🇺",
+            pattern: "(?i)俄罗斯|俄|\\bRU\\b|Russia|莫斯科|Moscow|🇷🇺",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Russia.png`
         },
         "泰国": {
-            pattern: "泰国|泰|TH|Thailand|🇹🇭",
+            pattern: "(?i)泰国|泰|TH|Thailand|曼谷|🇹🇭",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Thailand.png`
         },
         "印度": {
-            pattern: "印度|IN|India|🇮🇳",
+            pattern: "(?i)印度|IN|India|孟买|Mumbai|🇮🇳",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/India.png`
         },
         "马来西亚": {
-            pattern: "马来西亚|马来|MY|Malaysia|🇲🇾",
+            pattern: "(?i)马来西亚|马来|MY|Malaysia|吉隆坡|🇲🇾",
             icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Malaysia.png`
         }
     };
@@ -334,8 +342,9 @@ function buildBaseLists({
 function buildRules({
     quicEnabled: e
 }) {
-    const o = [...baseRules];
-    return e || o.unshift("AND,((DST-PORT,443),(NETWORK,UDP)),REJECT"), o
+    const o = [...whiteListRules];
+    e || o.push("AND,((DST-PORT,443),(NETWORK,UDP)),REJECT");
+    return o.push(...baseRules), o
 }
 
 function buildDnsConfig({
@@ -350,7 +359,17 @@ function buildDnsConfig({
         "default-nameserver": ["119.29.29.29", "223.5.5.5"],
         nameserver: ["system", "223.5.5.5", "119.29.29.29", "180.184.1.1"],
         fallback: ["quic://dns0.eu", "https://dns.cloudflare.com/dns-query", "https://dns.sb/dns-query", "tcp://208.67.222.222", "tcp://8.26.56.2"],
-        "proxy-server-nameserver": ["https://dns.alidns.com/dns-query", "tls://dot.pub"]
+        "proxy-server-nameserver": ["https://dns.alidns.com/dns-query", "tls://dot.pub"],
+        "nameserver-policy": {
+            "geosite:cn,private": [
+                "https://dns.alidns.com/dns-query",
+                "https://doh.pub/dns-query"
+            ],
+            "+.cn": [
+                "https://dns.alidns.com/dns-query",
+                "https://doh.pub/dns-query"
+            ]
+        }
     };
     return o && (t["fake-ip-filter"] = o), t
 }
@@ -392,7 +411,11 @@ function parseCountries(e) {
     const o = e.proxies || [],
         t = Object.create(null),
         r = {};
-    for (const [e, o] of Object.entries(countriesMeta)) r[e] = new RegExp(o.pattern.replace(/^\(\?i\)/, ""));
+    for (const [e, o] of Object.entries(countriesMeta)) {
+        const isIgnoreCase = o.pattern.startsWith("(?i)");
+        const cleanPattern = isIgnoreCase ? o.pattern.slice(4) : o.pattern;
+        r[e] = new RegExp(cleanPattern, isIgnoreCase ? "i" : undefined);
+    }
     for (const e of o) {
         const o = e.name || "";
         if (!LANDING_REGEX.test(o) && !LOW_COST_REGEX.test(o))

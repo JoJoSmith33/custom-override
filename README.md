@@ -10,14 +10,14 @@
 
 | 功能 | 说明 |
 |------|------|
-| **节点地区分组** | 按正则匹配将节点分类到 16 个国家/地区（香港、台湾、美国等），支持权重排序 |
+| **节点地区分组** | 按正则匹配将节点分类到 16 个国家/地区（香港、台湾、美国等），深度扩充城市名（洛杉矶/硅谷/新北/大坂等）与线路前缀（沪日/深美等） |
 | **Tag 标签分组** | 识别节点名称中的 `[Tag:xxx]` 标记，自动创建自定义标签代理组 |
 | **低倍率节点** | 自动筛出 `0.x 倍率`、`省流`、`实验性` 等低成本节点单独分组 |
 | **落地节点** | 识别家宽/商宽/星链等落地类节点，支持前置代理链路 |
 | **负载均衡** | 地区组可在 `url-test`（自动选择最低延迟）和 `load-balance`（负载均衡）间切换 |
 | **正则过滤模式** | 可选使用 `include-all + filter` 替代直接枚举节点名，适用于节点名不固定的场景 |
-| **分流规则** | 内置 30+ 条分流规则，覆盖广告拦截、AI 服务、流媒体、社交、加密货币等 |
-| **DNS 配置** | 支持 FakeIP / RedirHost 两种 DNS 模式，内置国内外 DNS 分流 |
+| **分流与白名单** | 内置直连白名单（友盟/PicGo/字节/豆包/神策/Polyfill/`.cn`顶级域），覆盖广告拦截、AI、流媒体、加密货币等 30+ 条规则 |
+| **DNS 增强分流** | Fake-IP 模式自动过滤 `+.cn` 与国内域名；内置 `nameserver-policy` 定向阿里/腾讯 DoH 解析真实 IP |
 | **完整配置输出** | `full` 模式下输出可直接被 mihomo 内核加载的完整配置 |
 
 ## 传入参数
@@ -233,6 +233,29 @@ flowchart LR
 3. 标签组带有 URL 健康检测（`https://cp.cloudflare.com/generate_204`，间隔 60s，容差 20ms）
 4. 未带标签的节点继续参与地区分类等正常流程
 5. 标签组名会被加入各服务代理组的可选列表中
+
+## DNS 与 Fake-IP 机制
+
+在 `fakeip=true`（默认）模式下，脚本自动构建完整的国内分流 DNS 体系：
+
+1. **Fake-IP 过滤 (`fake-ip-filter`)**：
+   - 包含 `+.cn`（所有以 `.cn` 结尾的顶级域名直接解析真实 IP，不进入 Fake-IP 范围）；
+   - 包含 `geosite:cn`、`geosite:private`、`geosite:connectivity-check` 等常用免 Fake-IP 类别；
+   - 包含米家云端及消息推送域名（`dlg.io.mi.com`、`Mijia Cloud` 等）。
+2. **DNS 分流策略 (`nameserver-policy`)**：
+   - 针对 `geosite:cn,private` 以及 `+.cn` 域名，直接定向至阿里与腾讯 DoH（`https://dns.alidns.com/dns-query`、`https://doh.pub/dns-query`）解析真实 IP，保证国内访问速度与解析纯净度；
+   - 其余海外域名经由系统 DNS、国内备选与海外 fallback DoH 混合解析。
+
+## 直连白名单规则
+
+脚本默认内置顶层直连白名单规则，无需在 Sub-Store 额外挂载次级脚本：
+- `DOMAIN-SUFFIX,umeng.com,DIRECT`
+- `DOMAIN-SUFFIX,picgo.app,DIRECT`
+- `DOMAIN-SUFFIX,zijieapi.com,DIRECT`
+- `DOMAIN-SUFFIX,doubao.com,DIRECT`
+- `DOMAIN-SUFFIX,datasink.sensorsdata.cn,DIRECT`
+- `DOMAIN-SUFFIX,polyfill.io,DIRECT`
+- `DOMAIN-SUFFIX,cn,DIRECT`
 
 ## 许可
 
