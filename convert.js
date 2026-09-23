@@ -471,6 +471,10 @@ function buildProxyGroups({
         name: tag,
         icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Bot.png`,
         type: "url-test",
+        url: "https://cp.cloudflare.com/generate_204",
+        interval: 60,
+        tolerance: 20,
+        lazy: !1,
         ...regexFilter ? {
             "include-all": !0,
             filter: `\\[Tag:${tag}\\]`
