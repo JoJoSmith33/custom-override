@@ -68,9 +68,7 @@ const NODE_SUFFIX = "节点",
         NETFLIX: "Netflix",
         TIKTOK: "TikTok",
         SPOTIFY: "Spotify",
-        EHENTAI: "E-Hentai",
         TELEGRAM: "Telegram",
-        TRUTH_SOCIAL: "真相社交",
         PIKPAK: "PikPak网盘",
         SSH: "SSH(22端口)",
         SOGOU_INPUT: "搜狗输入法",
@@ -118,14 +116,6 @@ const NODE_SUFFIX = "节点",
             interval: 86400,
             url: `${CDN_URL}/gh/powerfullz/override-rules@master/ruleset/TikTok.list`,
             path: "./ruleset/TikTok.list"
-        },
-        EHentai: {
-            type: "http",
-            behavior: "classical",
-            format: "text",
-            interval: 86400,
-            url: `${CDN_URL}/gh/powerfullz/override-rules@master/ruleset/EHentai.list`,
-            path: "./ruleset/EHentai.list"
         },
         SteamFix: {
             type: "http",
@@ -176,7 +166,7 @@ const NODE_SUFFIX = "节点",
         `DOMAIN-SUFFIX,datasink.sensorsdata.cn,${PROXY_GROUPS.DIRECT}`,
         `DOMAIN-SUFFIX,polyfill.io,${PROXY_GROUPS.DIRECT}`
     ],
-    baseRules = [`RULE-SET,ADBlock,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,AdditionalFilter,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,SogouInput,${PROXY_GROUPS.SOGOU_INPUT}`, `DOMAIN-SUFFIX,truthsocial.com,${PROXY_GROUPS.TRUTH_SOCIAL}`, `RULE-SET,StaticResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,CDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,AdditionalCDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,Crypto,${PROXY_GROUPS.CRYPTO}`, `RULE-SET,EHentai,${PROXY_GROUPS.EHENTAI}`, `RULE-SET,TikTok,${PROXY_GROUPS.TIKTOK}`, `RULE-SET,SteamFix,${PROXY_GROUPS.DIRECT}`, `RULE-SET,GoogleFCM,${PROXY_GROUPS.DIRECT}`, `GEOSITE,YOUTUBE,${PROXY_GROUPS.YOUTUBE}`, `GEOSITE,TELEGRAM,${PROXY_GROUPS.TELEGRAM}`, `GEOSITE,CATEGORY-AI-!CN,${PROXY_GROUPS.AI_SERVICE}`, `GEOSITE,GOOGLE-PLAY@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,MICROSOFT@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,APPLE,${PROXY_GROUPS.APPLE}`, `GEOSITE,MICROSOFT,${PROXY_GROUPS.MICROSOFT}`, `GEOSITE,GOOGLE,${PROXY_GROUPS.GOOGLE}`, `GEOSITE,NETFLIX,${PROXY_GROUPS.NETFLIX}`, `GEOSITE,SPOTIFY,${PROXY_GROUPS.SPOTIFY}`, `GEOSITE,BAHAMUT,${PROXY_GROUPS.BAHAMUT}`, `GEOSITE,BILIBILI,${PROXY_GROUPS.BILIBILI}`, `GEOSITE,PIKPAK,${PROXY_GROUPS.PIKPAK}`, `GEOSITE,GFW,${PROXY_GROUPS.SELECT}`, `DOMAIN-SUFFIX,cn,${PROXY_GROUPS.DIRECT}`, `GEOSITE,CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,PRIVATE,${PROXY_GROUPS.DIRECT}`, `GEOIP,NETFLIX,${PROXY_GROUPS.NETFLIX},no-resolve`, `GEOIP,TELEGRAM,${PROXY_GROUPS.TELEGRAM},no-resolve`, `GEOIP,CN,${PROXY_GROUPS.DIRECT}`, `GEOIP,PRIVATE,${PROXY_GROUPS.DIRECT}`, `DST-PORT,22,${PROXY_GROUPS.SSH}`, `MATCH,${PROXY_GROUPS.SELECT}`],
+    baseRules = [`RULE-SET,ADBlock,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,AdditionalFilter,${PROXY_GROUPS.AD_BLOCK}`, `RULE-SET,SogouInput,${PROXY_GROUPS.SOGOU_INPUT}`, `RULE-SET,StaticResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,CDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,AdditionalCDNResources,${PROXY_GROUPS.STATIC_RESOURCES}`, `RULE-SET,Crypto,${PROXY_GROUPS.CRYPTO}`, `RULE-SET,TikTok,${PROXY_GROUPS.TIKTOK}`, `RULE-SET,SteamFix,${PROXY_GROUPS.DIRECT}`, `RULE-SET,GoogleFCM,${PROXY_GROUPS.DIRECT}`, `GEOSITE,YOUTUBE,${PROXY_GROUPS.YOUTUBE}`, `GEOSITE,TELEGRAM,${PROXY_GROUPS.TELEGRAM}`, `GEOSITE,CATEGORY-AI-!CN,${PROXY_GROUPS.AI_SERVICE}`, `GEOSITE,GOOGLE-PLAY@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,MICROSOFT@CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,APPLE,${PROXY_GROUPS.APPLE}`, `GEOSITE,MICROSOFT,${PROXY_GROUPS.MICROSOFT}`, `GEOSITE,GOOGLE,${PROXY_GROUPS.GOOGLE}`, `GEOSITE,NETFLIX,${PROXY_GROUPS.NETFLIX}`, `GEOSITE,SPOTIFY,${PROXY_GROUPS.SPOTIFY}`, `GEOSITE,BAHAMUT,${PROXY_GROUPS.BAHAMUT}`, `GEOSITE,BILIBILI,${PROXY_GROUPS.BILIBILI}`, `GEOSITE,PIKPAK,${PROXY_GROUPS.PIKPAK}`, `GEOSITE,GFW,${PROXY_GROUPS.SELECT}`, `DOMAIN-SUFFIX,cn,${PROXY_GROUPS.DIRECT}`, `GEOSITE,CN,${PROXY_GROUPS.DIRECT}`, `GEOSITE,PRIVATE,${PROXY_GROUPS.DIRECT}`, `GEOIP,NETFLIX,${PROXY_GROUPS.NETFLIX},no-resolve`, `GEOIP,TELEGRAM,${PROXY_GROUPS.TELEGRAM},no-resolve`, `GEOIP,CN,${PROXY_GROUPS.DIRECT}`, `GEOIP,PRIVATE,${PROXY_GROUPS.DIRECT}`, `DST-PORT,22,${PROXY_GROUPS.SSH}`, `MATCH,${PROXY_GROUPS.SELECT}`],
     snifferConfig = {
         sniff: {
             TLS: {
@@ -597,11 +587,6 @@ function buildProxyGroups({
         type: "select",
         proxies: l
     }, {
-        name: PROXY_GROUPS.EHENTAI,
-        icon: `${CDN_URL}/gh/powerfullz/override-rules@master/icons/Ehentai.png`,
-        type: "select",
-        proxies: l
-    }, {
         name: PROXY_GROUPS.TELEGRAM,
         icon: `${CDN_URL}/gh/Koolson/Qure@master/IconSet/Color/Telegram.png`,
         type: "select",
@@ -609,11 +594,6 @@ function buildProxyGroups({
     },
     ...tagGroups,
     {
-        name: PROXY_GROUPS.TRUTH_SOCIAL,
-        icon: `${CDN_URL}/gh/powerfullz/override-rules@master/icons/TruthSocial.png`,
-        type: "select",
-        proxies: O ? ["美国节点", PROXY_GROUPS.SELECT, PROXY_GROUPS.MANUAL] : l
-    }, {
         name: PROXY_GROUPS.PIKPAK,
         icon: `${CDN_URL}/gh/powerfullz/override-rules@master/icons/PikPak.png`,
         type: "select",

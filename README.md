@@ -188,10 +188,8 @@ flowchart LR
 ├── Netflix (select)
 ├── TikTok (select)
 ├── Spotify (select)
-├── E-Hentai (select)
 ├── Telegram (select)
 ├── [Tag 标签组] (url-test) ← 由节点 [Tag:xxx] 标记动态生成
-├── 真相社交 (select)      ← 有美国节点时优先美国
 ├── PikPak网盘 (select)
 ├── SSH(22端口) (select)
 ├── 搜狗输入法 (select)    ← 直连 / REJECT
@@ -217,7 +215,6 @@ flowchart LR
 | StaticResources | text | ruleset.skk.moe | CDN/静态资源域名 |
 | CDNResources | text | ruleset.skk.moe | CDN 相关规则 |
 | TikTok | text | powerfullz/override-rules | TikTok 分流 |
-| EHentai | text | powerfullz/override-rules | E-Hentai 分流 |
 | SteamFix | text | powerfullz/override-rules | Steam 直连修复 |
 | GoogleFCM | text | powerfullz/override-rules | Firebase 推送直连 |
 | AdditionalFilter | text | powerfullz/override-rules | 补充广告过滤 |
