@@ -178,6 +178,7 @@ flowchart LR
 ├── 落地节点 (select)      ← 仅 landing 模式，家宽/星链等落地节点
 ├── 静态资源 (select)      ← CDN 等静态资源走向
 ├── AI服务 (select)        ← ChatGPT / Claude 等 AI 服务
+├── Gemini-Antigravity (select) ← Gemini / Antigravity 专用分组
 ├── 加密货币 (select)      ← 交易所等加密货币服务
 ├── 苹果服务 (select)
 ├── 谷歌服务 (select)
